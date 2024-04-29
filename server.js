@@ -5,6 +5,7 @@ const {notFound}=require('./Middlewares/errorMiddleware');
 const userRoutes=require('./Routes/userRoutes');
 const chatRoutes=require('./Routes/chatRoutes');
 const messageRoutes=require('./Routes/messageRoutes');
+const path=require('path');
 const bodyParser=require('body-parser');
 app.use(bodyParser.json());
 app.use(express.json());
@@ -13,6 +14,19 @@ const PORT=process.env.PORT;
 app.use("/api/user",userRoutes)
 app.use('/api/chat',chatRoutes);
 app.use('/api/message',messageRoutes)
+// ----------------------Deployment----------------------------------------------------------------------------------------------------------------------------------------
+const _dirname1=path.resolve();
+if(process.env.NODE_ENV==='production'){
+       app.use(express.static(path.join(_dirname1,'/frontend/build')));
+         app.get('*',(req,res)=>res.sendFile(path.resolve(_dirname1,'frontend','build','index.html')));
+}
+else{
+    app.get('/',(req,res)=>{
+        res.send('API is running');
+    })
+
+}
+//----------------------Deployment----------------------------------------------------------------------------------------------------------------------------------------
 app.use(notFound);
 const server=app.listen(PORT,()=>{console.log(`Server is running on port ${PORT}`)});
 const io=require('socket.io')(server,{
