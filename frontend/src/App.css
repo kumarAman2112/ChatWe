@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Lora:ital,wght@1,600&family=Poppins:ital,wght@0,800;1,700&family=Roboto+Serif:opsz,wght@8..144,300&family=Roboto:wght@300;400&family=Varela&family=Work+Sans:ital,wght@0,300;1,300&display=swap');
+.App{
+    min-height:100vh;
+    display: flex;
+    background:url('../public/bg.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+::-webkit-scrollbar {
+    width: 0px;
+}
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
