@@ -9,9 +9,9 @@ import {
   Avatar,
   Input,
   useToast,
+  MenuItem,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
-import NotificationItem from "./notificationItem";
 import axios from "axios";
 import { useDisclosure } from "@chakra-ui/hooks";
 import { BellIcon, ChevronDownIcon } from "@chakra-ui/icons";
@@ -42,8 +42,7 @@ const SideDrawer = () => {
     setSelectedChat,
     chats,
     setChats,
-    notification,
-    setNotification,
+    notifications
   } = ChatState();
   const navigate = useNavigate();
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -51,11 +50,6 @@ const SideDrawer = () => {
   const logoutHandler = () => {
     localStorage.removeItem("userInfo");
     navigate("/");
-  };
-    function notificationShower(notif) {
-    setSelectedChat(notif.chat);
-    setNotification(notification.filter((n) => n._id !== notif._id));
-    console.log(notif)
   };
   const handleSearch = async () => {
     if (!search) {
@@ -101,7 +95,6 @@ const SideDrawer = () => {
         },
       };
       const { data } = await axios.post("/api/chat/", { userId }, config);
-      console.log(data);
       if (!chats.find((c) => c._id === data._id)) {
         setChats([data, ...chats]);
       }
@@ -149,21 +142,18 @@ const SideDrawer = () => {
         </Text>
         <div>
           <Menu>
-            <MenuButton p={1} onClick={() => console.log("MenuButton")}>
+            <MenuButton p={1}>
               <NotificationBadge
-                count={notification.length}
+                count={notifications.length}
                 effect={Effect.SCALE}
               />
-              <BellIcon/>
+              <BellIcon fontSize='28px'/>
               <MenuList>
-              {!notification.length && "No Notifications"}
-                {notification.map((notif) => (
-                  <NotificationItem
-                    key={notif._id}
-                    notif={notif}
-                    notificationHandler={() => notificationShower(notif)}
-                  />
-                ))}
+             {
+              notifications.length>0 ? (
+                notifications.map((notif)=>(<MenuItem key={notif._id}>{`New message from ${notif.sender.name}`}</MenuItem>))
+              ):null
+             }
               </MenuList>
             </MenuButton>
           </Menu>

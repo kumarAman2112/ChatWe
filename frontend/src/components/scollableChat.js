@@ -8,7 +8,6 @@ import {
 import { ChatState } from "../Context/chatProvider";
 import { Avatar } from "@chakra-ui/react";
 const ScrollableChat = ({ messages }) => {
-  console.log(messages)
   const { user } = ChatState();
   return (
     <ScrollableFeed>

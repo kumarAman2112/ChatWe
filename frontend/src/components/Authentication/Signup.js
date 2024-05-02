@@ -39,8 +39,6 @@ const Signup = () => {
       data.append("upload_preset", "ChatApp");
       data.append("cloud_name", "amankumar");
       const res=await axios.post("https://api.cloudinary.com/v1_1/amankumar/image/upload",data);
-      console.log(res);
-      console.log(res.data.url);
       setPic(res.data.url);
       setLoading(false);
     } else {

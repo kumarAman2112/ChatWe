@@ -26,7 +26,7 @@ const SingleChat = ({ fetchChatsAgain, setFetchChatsAgain }) => {
   const [socketConnected, setSocketConnected] = useState(false);
   const [typing, setTyping] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
-  const { user, selectedChat, setSelectedChat,notification,setNotification } = ChatState();
+  const { user, selectedChat, setSelectedChat,notifications,setNotifications } = ChatState();
   const toast = useToast();
 
   const fetchAllMessages = async () => {
@@ -83,8 +83,8 @@ const SingleChat = ({ fetchChatsAgain, setFetchChatsAgain }) => {
         selectedChatCompare._id !== newMessageReceived.chat._id
       ) {
         //give notification
-        if(!notification.includes(newMessageReceived)){
-        setNotification([ newMessageReceived, ...notification]);
+        if(!notifications.includes(newMessageReceived)){
+        setNotifications([ newMessageReceived, ...notifications]);
          setFetchChatsAgain(!fetchChatsAgain);
         }
       }else
