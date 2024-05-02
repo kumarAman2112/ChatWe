@@ -1,7 +1,6 @@
 import React from "react";
 import ScrollableFeed from "react-scrollable-feed";
 import {
-  isLastMessage,
   isSameSender,
   isSameSenderMargin,
   isSameUser,
@@ -9,16 +8,18 @@ import {
 import { ChatState } from "../Context/chatProvider";
 import { Avatar } from "@chakra-ui/react";
 const ScrollableChat = ({ messages }) => {
+  console.log(messages)
   const { user } = ChatState();
   return (
     <ScrollableFeed>
       {messages &&
         messages.map((msg, ind) => (
+        
           <div key={msg._id} style={{ display: "flex",alignItems:'center'}}>
-            {(isSameSender(messages, msg, ind, user?.response.id)||isLastMessage(messages, ind, user?.response.id)
-            ) && (
+            {(isSameSender(messages,msg,ind, user?.response._id)
+            ) ? (
               <Avatar
-              
+
                 mt={3}
                 mr={1}
                 size="sm"
@@ -27,14 +28,17 @@ const ScrollableChat = ({ messages }) => {
                 src={msg.sender.profilePic}
                 maxWidth='75%'
               />
-            )}
+            ):<></>}
             <span
               style={{
                 backgroundColor: `${
-                  msg.sender._id === user?.response._id ? "#D4E7C5" : "#AAD7D9"
+                  msg.sender._id === user?.response._id ? "#1C6DD0" : "#E8EAE6"
                 }`,
                 borderRadius: "20px",
                 padding: "5px 15px",
+                color: `${
+                  msg.sender._id === user?.response._id ? "white" : "black"
+                }`,
                 marginLeft: isSameSenderMargin(
                   messages,
                   msg,

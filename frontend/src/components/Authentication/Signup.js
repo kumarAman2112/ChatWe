@@ -12,7 +12,7 @@ const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmpassword, setConfirmpassword] = useState("");
-  const [pic, setPic] = useState("");
+  const [profilePic, setPic] = useState("");
   const toast = useToast();
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -87,7 +87,7 @@ const Signup = () => {
       };
       const {data}= await axios.post(
         "/api/user/signup",
-        { name, email, password, pic },
+        { name, email, password,profilePic },
         config
       );
       toast({

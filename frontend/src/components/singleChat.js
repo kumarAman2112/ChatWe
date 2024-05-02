@@ -183,14 +183,12 @@ const SingleChat = ({ fetchChatsAgain, setFetchChatsAgain }) => {
             display="flex"
             w="100%"
             h="100%"
-            bg="#E8E8E8"
+            
             flexDir="column"
             justifyContent="flex-end"
             overflowY="hidden"
             p={3}
-            borderRadius="lg"
-            borderColor="teal"
-            borderWidth="1px"
+           
           >
             {loading ? (
               <Spinner
