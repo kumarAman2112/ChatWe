@@ -18,12 +18,11 @@ const ScrollableChat = ({ messages }) => {
             {(isSameSender(messages,msg,ind, user?.response._id)
             ) ? (
               <Avatar
-
                 mt={3}
                 mr={1}
                 size="sm"
                 cursor="pointer"
-                name={msg.sender.name}
+             
                 src={msg.sender.profilePic}
                 maxWidth='75%'
               />

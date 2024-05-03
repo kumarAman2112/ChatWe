@@ -18,11 +18,11 @@ router.post('/',jwtAuthMiddleware,async(req,res)=>{
             chat:chatId
         }
         var resMessage=await Message.create(newMessage);
-        resMessage=await resMessage.populate('sender','name pic');
+        resMessage=await resMessage.populate('sender','name profilePic');
         resMessage=await resMessage.populate('chat');
         resMessage=await User.populate(resMessage,{
             path:'chat.users',
-            select:'name pic email'
+            select:'name profilePic email'
     });
     await Chat.findByIdAndUpdate(chatId,{
         latestMessage:resMessage,
@@ -37,7 +37,7 @@ router.post('/',jwtAuthMiddleware,async(req,res)=>{
 
 router.get('/:chatId',jwtAuthMiddleware,async(req,res)=>{
       try{
-            const message=await Message.find({chat:req.params.chatId}).populate('sender','name pic email').populate('chat');
+            const message=await Message.find({chat:req.params.chatId}).populate('sender','name profilePic email').populate('chat');
             res.status(200).json(message);
       }catch(err){
             console.log(err);
